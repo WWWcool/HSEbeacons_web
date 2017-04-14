@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DB_9DE66D_beaconsModelContainer" CdmEntityContainer="DB_9DE66D_beaconsEntities">
+    <EntitySetMapping Name="new_arcs">
+      <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_arcs">
+        <MappingFragment StoreEntitySet="new_arcs">
+          <ScalarProperty Name="arcId" ColumnName="arcId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="new_builds">
+      <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_builds">
+        <MappingFragment StoreEntitySet="new_builds">
+          <ScalarProperty Name="buildingId" ColumnName="buildingId" />
+          <ScalarProperty Name="buildingName" ColumnName="buildingName" />
+          <ScalarProperty Name="buildingNameRu" ColumnName="buildingNameRu" />
+          <ScalarProperty Name="matrixFile" ColumnName="matrixFile" />
+          <ScalarProperty Name="imageFile" ColumnName="imageFile" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="latt" ColumnName="latt" />
+          <ScalarProperty Name="longt" ColumnName="longt" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="street" ColumnName="street" />
+          <ScalarProperty Name="house" ColumnName="house" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="compass" ColumnName="compass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="new_connection">
+      <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_connection">
+        <MappingFragment StoreEntitySet="new_connection">
+          <ScalarProperty Name="connectionId" ColumnName="connectionId" />
+          <ScalarProperty Name="nodeFrst" ColumnName="nodeFrst" />
+          <ScalarProperty Name="nodeScnd" ColumnName="nodeScnd" />
+          <ScalarProperty Name="arcIdFk" ColumnName="arcIdFk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="new_floors">
+      <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_floors">
+        <MappingFragment StoreEntitySet="new_floors">
+          <ScalarProperty Name="floorId" ColumnName="floorId" />
+          <ScalarProperty Name="dir" ColumnName="dir" />
+          <ScalarProperty Name="tiles" ColumnName="tiles" />
+          <ScalarProperty Name="tilesXcount" ColumnName="tilesXcount" />
+          <ScalarProperty Name="tilesYcount" ColumnName="tilesYcount" />
+          <ScalarProperty Name="mapLevel" ColumnName="mapLevel" />
+          <ScalarProperty Name="buildingIdFk" ColumnName="buildingIdFk" />
+          <ScalarProperty Name="width" ColumnName="width" />
+          <ScalarProperty Name="height" ColumnName="height" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="new_ibeacons">
+      <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_ibeacons">
+        <MappingFragment StoreEntitySet="new_ibeacons">
+          <ScalarProperty Name="beaconId" ColumnName="beaconId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="uuid" ColumnName="uuid" />
+          <ScalarProperty Name="minor" ColumnName="minor" />
+          <ScalarProperty Name="major" ColumnName="major" />
+          <ScalarProperty Name="mapIdFK" ColumnName="mapIdFK" />
+          <ScalarProperty Name="coordX" ColumnName="coordX" />
+          <ScalarProperty Name="coordY" ColumnName="coordY" />
+          <ScalarProperty Name="nodeNum" ColumnName="nodeNum" />
+          <ScalarProperty Name="batteryLevel" ColumnName="batteryLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="new_nodes">
+      <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_nodes">
+        <MappingFragment StoreEntitySet="new_nodes">
+          <ScalarProperty Name="nodeId" ColumnName="nodeId" />
+          <ScalarProperty Name="coordX" ColumnName="coordX" />
+          <ScalarProperty Name="coordY" ColumnName="coordY" />
+          <ScalarProperty Name="mapIdFk" ColumnName="mapIdFk" />
+          <ScalarProperty Name="IbeaconIdFk" ColumnName="IbeaconIdFk" />
+          <ScalarProperty Name="nodeNum" ColumnName="nodeNum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

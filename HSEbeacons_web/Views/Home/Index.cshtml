@@ -1,0 +1,110 @@
+﻿<div class="row">
+    <div class="col-md-4">
+        <div class="userInfo" style="display:none;">
+            <h3>Success!</h3>
+            <p>You are logged in as: <span class="userName"></span></p>
+            <input type="button" value="Log Out" id="logOut" />
+        </div>
+        <div class="loginForm">
+            <h3>Log In</h3>
+            <label>Email</label><br />
+            <input type="email" id="emailLogin" /> <br /><br />
+            <label>Password</label><br />
+            <input type="password" id="passwordLogin" /><br /><br />
+            <input type="submit" id="submitLogin" value="Log In" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div>
+            <h3> Register </h3>
+            <label>Email</label><br />
+            <input type="Email" id="email" /> <br /><br />
+            <label>Password</label><br />
+            <input type="Password" id="password" /><br /><br />
+            <label>Confirm your password</label><br />
+            <input type="password" id="confirmpassword" /><br /><br />
+            <input type="submit" id="submit" value="Register" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div>
+            <h3> Data </h3>
+            <input type="submit" id="getItemsButton" value="Get more information" />
+        </div>
+    </div>
+</div>
+    @section scripts{
+        <script type="text/javascript">
+            $(function () {
+                $('#submit').click(function (e) {
+                    e.preventDefault();
+                    var data = {
+                        Email: $('#email').val(),
+                        Password: $('#password').val(),
+                        ConfirmPassword: $('#confirmpassword').val()
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/Account/Register',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data)
+                    }).success(function (data) {
+                        alert("Регистрация пройдена");
+                    }).fail(function (data) {
+                        alert("В процесе регистрации возникла ошибка");
+                    });
+                });
+                var tokenKey = "tokenInfo";
+                $('#submitLogin').click(function (e) {
+                    e.preventDefault();
+                    var loginData = {
+                        grant_type: 'password',
+                        username: $('#emailLogin').val(),
+                        password: $('#passwordLogin').val()
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Token',
+                        data: loginData
+                    }).success(function (data) {
+                        $('.userName').text(data.userName);
+                        $('.userInfo').css('display', 'block');
+                        $('.loginForm').css('display', 'none');
+                        // сохраняем в хранилище sessionStorage токен доступа
+                        sessionStorage.setItem(tokenKey, data.access_token);
+                        console.log(data.access_token);
+                    }).fail(function (data) {
+                        alert('При логине возникла ошибка');
+                    });
+                });
+
+                $('#logOut').click(function (e) {
+                    e.preventDefault();
+                    sessionStorage.removeItem(tokenKey);
+                    $('.userInfo').css('display', 'none');
+                    $('.loginForm').css('display', 'block');
+                });
+                $('#getItemsButton').click(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/ibeacon/1',
+                        /*url: '/api/database/1',
+                        beforeSend: function (xhr) {
+                            
+                            var token = sessionStorage.getItem(tokenKey);
+                            xhr.setRequestHeader("Authorization", "Bearer " + token);
+                        },*/
+                        success: function (data) {
+                            alert(data);
+                        },
+                        fail: function (data) {
+                            alert(data);
+                        }
+                    });
+                });
+            })
+        </script>
+    }

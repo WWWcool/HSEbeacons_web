@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DB_9DE66D_beaconsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="new_arcs">
+          <Key>
+            <PropertyRef Name="arcId" />
+          </Key>
+          <Property Name="arcId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="new_builds">
+          <Key>
+            <PropertyRef Name="buildingId" />
+          </Key>
+          <Property Name="buildingId" Type="int" Nullable="false" />
+          <Property Name="buildingName" Type="varchar" MaxLength="100" />
+          <Property Name="buildingNameRu" Type="nvarchar" MaxLength="200" />
+          <Property Name="matrixFile" Type="varchar" MaxLength="200" />
+          <Property Name="imageFile" Type="varchar" MaxLength="200" />
+          <Property Name="description" Type="nvarchar" MaxLength="250" />
+          <Property Name="latt" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="longt" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" />
+          <Property Name="street" Type="nvarchar" MaxLength="100" />
+          <Property Name="house" Type="nvarchar" MaxLength="25" />
+          <Property Name="country" Type="char" MaxLength="10" />
+          <Property Name="compass" Type="decimal" Precision="18" Scale="6" />
+        </EntityType>
+        <EntityType Name="new_connection">
+          <Key>
+            <PropertyRef Name="connectionId" />
+          </Key>
+          <Property Name="connectionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nodeFrst" Type="int" />
+          <Property Name="nodeScnd" Type="int" />
+          <Property Name="arcIdFk" Type="int" />
+        </EntityType>
+        <EntityType Name="new_floors">
+          <Key>
+            <PropertyRef Name="floorId" />
+          </Key>
+          <Property Name="floorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dir" Type="varchar" MaxLength="50" />
+          <Property Name="tiles" Type="varchar" MaxLength="50" />
+          <Property Name="tilesXcount" Type="int" />
+          <Property Name="tilesYcount" Type="int" />
+          <Property Name="mapLevel" Type="varchar" MaxLength="50" />
+          <Property Name="buildingIdFk" Type="int" />
+          <Property Name="width" Type="int" />
+          <Property Name="height" Type="int" />
+        </EntityType>
+        <EntityType Name="new_ibeacons">
+          <Key>
+            <PropertyRef Name="beaconId" />
+          </Key>
+          <Property Name="beaconId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="150" />
+          <Property Name="uuid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="minor" Type="int" Nullable="false" />
+          <Property Name="major" Type="int" Nullable="false" />
+          <Property Name="mapIdFK" Type="int" />
+          <Property Name="coordX" Type="int" />
+          <Property Name="coordY" Type="int" />
+          <Property Name="nodeNum" Type="int" />
+          <Property Name="batteryLevel" Type="int" />
+        </EntityType>
+        <EntityType Name="new_nodes">
+          <Key>
+            <PropertyRef Name="nodeId" />
+          </Key>
+          <Property Name="nodeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="coordX" Type="int" />
+          <Property Name="coordY" Type="int" />
+          <Property Name="mapIdFk" Type="int" />
+          <Property Name="IbeaconIdFk" Type="int" />
+          <Property Name="nodeNum" Type="int" />
+        </EntityType>
+        <Association Name="FK_new_connection_new_arcs">
+          <End Role="new_arcs" Type="Self.new_arcs" Multiplicity="0..1" />
+          <End Role="new_connection" Type="Self.new_connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_arcs">
+              <PropertyRef Name="arcId" />
+            </Principal>
+            <Dependent Role="new_connection">
+              <PropertyRef Name="arcIdFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_connection_new_nodes">
+          <End Role="new_nodes" Type="Self.new_nodes" Multiplicity="0..1" />
+          <End Role="new_connection" Type="Self.new_connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_nodes">
+              <PropertyRef Name="nodeId" />
+            </Principal>
+            <Dependent Role="new_connection">
+              <PropertyRef Name="nodeFrst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_connection_new_nodes1">
+          <End Role="new_nodes" Type="Self.new_nodes" Multiplicity="0..1" />
+          <End Role="new_connection" Type="Self.new_connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_nodes">
+              <PropertyRef Name="nodeId" />
+            </Principal>
+            <Dependent Role="new_connection">
+              <PropertyRef Name="nodeScnd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_floors_new_builds">
+          <End Role="new_builds" Type="Self.new_builds" Multiplicity="0..1" />
+          <End Role="new_floors" Type="Self.new_floors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_builds">
+              <PropertyRef Name="buildingId" />
+            </Principal>
+            <Dependent Role="new_floors">
+              <PropertyRef Name="buildingIdFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_nodes_new_floors">
+          <End Role="new_floors" Type="Self.new_floors" Multiplicity="0..1" />
+          <End Role="new_nodes" Type="Self.new_nodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_floors">
+              <PropertyRef Name="floorId" />
+            </Principal>
+            <Dependent Role="new_nodes">
+              <PropertyRef Name="mapIdFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_nodes_new_ibeacons">
+          <End Role="new_ibeacons" Type="Self.new_ibeacons" Multiplicity="0..1" />
+          <End Role="new_nodes" Type="Self.new_nodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_ibeacons">
+              <PropertyRef Name="beaconId" />
+            </Principal>
+            <Dependent Role="new_nodes">
+              <PropertyRef Name="IbeaconIdFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DB_9DE66D_beaconsModelContainer">
+          <EntitySet Name="new_arcs" EntityType="Self.new_arcs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="new_builds" EntityType="Self.new_builds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="new_connection" EntityType="Self.new_connection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="new_floors" EntityType="Self.new_floors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="new_ibeacons" EntityType="Self.new_ibeacons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="new_nodes" EntityType="Self.new_nodes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_new_connection_new_arcs" Association="Self.FK_new_connection_new_arcs">
+            <End Role="new_arcs" EntitySet="new_arcs" />
+            <End Role="new_connection" EntitySet="new_connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_connection_new_nodes" Association="Self.FK_new_connection_new_nodes">
+            <End Role="new_nodes" EntitySet="new_nodes" />
+            <End Role="new_connection" EntitySet="new_connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_connection_new_nodes1" Association="Self.FK_new_connection_new_nodes1">
+            <End Role="new_nodes" EntitySet="new_nodes" />
+            <End Role="new_connection" EntitySet="new_connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_floors_new_builds" Association="Self.FK_new_floors_new_builds">
+            <End Role="new_builds" EntitySet="new_builds" />
+            <End Role="new_floors" EntitySet="new_floors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_nodes_new_floors" Association="Self.FK_new_nodes_new_floors">
+            <End Role="new_floors" EntitySet="new_floors" />
+            <End Role="new_nodes" EntitySet="new_nodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_nodes_new_ibeacons" Association="Self.FK_new_nodes_new_ibeacons">
+            <End Role="new_ibeacons" EntitySet="new_ibeacons" />
+            <End Role="new_nodes" EntitySet="new_nodes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_9DE66D_beaconsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="new_arcs">
+          <Key>
+            <PropertyRef Name="arcId" />
+          </Key>
+          <Property Name="arcId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="new_connection" Relationship="Self.FK_new_connection_new_arcs" FromRole="new_arcs" ToRole="new_connection" />
+        </EntityType>
+        <EntityType Name="new_builds">
+          <Key>
+            <PropertyRef Name="buildingId" />
+          </Key>
+          <Property Name="buildingId" Type="Int32" Nullable="false" />
+          <Property Name="buildingName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="buildingNameRu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="matrixFile" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="imageFile" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="latt" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="longt" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="house" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="compass" Type="Decimal" Precision="18" Scale="6" />
+          <NavigationProperty Name="new_floors" Relationship="Self.FK_new_floors_new_builds" FromRole="new_builds" ToRole="new_floors" />
+        </EntityType>
+        <EntityType Name="new_connection">
+          <Key>
+            <PropertyRef Name="connectionId" />
+          </Key>
+          <Property Name="connectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nodeFrst" Type="Int32" />
+          <Property Name="nodeScnd" Type="Int32" />
+          <Property Name="arcIdFk" Type="Int32" />
+          <NavigationProperty Name="new_arcs" Relationship="Self.FK_new_connection_new_arcs" FromRole="new_connection" ToRole="new_arcs" />
+          <NavigationProperty Name="new_nodes" Relationship="Self.FK_new_connection_new_nodes" FromRole="new_connection" ToRole="new_nodes" />
+          <NavigationProperty Name="new_nodes1" Relationship="Self.FK_new_connection_new_nodes1" FromRole="new_connection" ToRole="new_nodes" />
+        </EntityType>
+        <EntityType Name="new_floors">
+          <Key>
+            <PropertyRef Name="floorId" />
+          </Key>
+          <Property Name="floorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dir" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tiles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tilesXcount" Type="Int32" />
+          <Property Name="tilesYcount" Type="Int32" />
+          <Property Name="mapLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="buildingIdFk" Type="Int32" />
+          <Property Name="width" Type="Int32" />
+          <Property Name="height" Type="Int32" />
+          <NavigationProperty Name="new_builds" Relationship="Self.FK_new_floors_new_builds" FromRole="new_floors" ToRole="new_builds" />
+          <NavigationProperty Name="new_nodes" Relationship="Self.FK_new_nodes_new_floors" FromRole="new_floors" ToRole="new_nodes" />
+        </EntityType>
+        <EntityType Name="new_ibeacons">
+          <Key>
+            <PropertyRef Name="beaconId" />
+          </Key>
+          <Property Name="beaconId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="uuid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="minor" Type="Int32" Nullable="false" />
+          <Property Name="major" Type="Int32" Nullable="false" />
+          <Property Name="mapIdFK" Type="Int32" />
+          <Property Name="coordX" Type="Int32" />
+          <Property Name="coordY" Type="Int32" />
+          <Property Name="nodeNum" Type="Int32" />
+          <Property Name="batteryLevel" Type="Int32" />
+          <NavigationProperty Name="new_nodes" Relationship="Self.FK_new_nodes_new_ibeacons" FromRole="new_ibeacons" ToRole="new_nodes" />
+        </EntityType>
+        <EntityType Name="new_nodes">
+          <Key>
+            <PropertyRef Name="nodeId" />
+          </Key>
+          <Property Name="nodeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="coordX" Type="Int32" />
+          <Property Name="coordY" Type="Int32" />
+          <Property Name="mapIdFk" Type="Int32" />
+          <Property Name="IbeaconIdFk" Type="Int32" />
+          <Property Name="nodeNum" Type="Int32" />
+          <NavigationProperty Name="new_connection" Relationship="Self.FK_new_connection_new_nodes" FromRole="new_nodes" ToRole="new_connection" />
+          <NavigationProperty Name="new_connection1" Relationship="Self.FK_new_connection_new_nodes1" FromRole="new_nodes" ToRole="new_connection" />
+          <NavigationProperty Name="new_floors" Relationship="Self.FK_new_nodes_new_floors" FromRole="new_nodes" ToRole="new_floors" />
+          <NavigationProperty Name="new_ibeacons" Relationship="Self.FK_new_nodes_new_ibeacons" FromRole="new_nodes" ToRole="new_ibeacons" />
+        </EntityType>
+        <Association Name="FK_new_connection_new_arcs">
+          <End Role="new_arcs" Type="Self.new_arcs" Multiplicity="0..1" />
+          <End Role="new_connection" Type="Self.new_connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_arcs">
+              <PropertyRef Name="arcId" />
+            </Principal>
+            <Dependent Role="new_connection">
+              <PropertyRef Name="arcIdFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_floors_new_builds">
+          <End Role="new_builds" Type="Self.new_builds" Multiplicity="0..1" />
+          <End Role="new_floors" Type="Self.new_floors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_builds">
+              <PropertyRef Name="buildingId" />
+            </Principal>
+            <Dependent Role="new_floors">
+              <PropertyRef Name="buildingIdFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_connection_new_nodes">
+          <End Role="new_nodes" Type="Self.new_nodes" Multiplicity="0..1" />
+          <End Role="new_connection" Type="Self.new_connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_nodes">
+              <PropertyRef Name="nodeId" />
+            </Principal>
+            <Dependent Role="new_connection">
+              <PropertyRef Name="nodeFrst" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_connection_new_nodes1">
+          <End Role="new_nodes" Type="Self.new_nodes" Multiplicity="0..1" />
+          <End Role="new_connection" Type="Self.new_connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_nodes">
+              <PropertyRef Name="nodeId" />
+            </Principal>
+            <Dependent Role="new_connection">
+              <PropertyRef Name="nodeScnd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_nodes_new_floors">
+          <End Role="new_floors" Type="Self.new_floors" Multiplicity="0..1" />
+          <End Role="new_nodes" Type="Self.new_nodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_floors">
+              <PropertyRef Name="floorId" />
+            </Principal>
+            <Dependent Role="new_nodes">
+              <PropertyRef Name="mapIdFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_new_nodes_new_ibeacons">
+          <End Role="new_ibeacons" Type="Self.new_ibeacons" Multiplicity="0..1" />
+          <End Role="new_nodes" Type="Self.new_nodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="new_ibeacons">
+              <PropertyRef Name="beaconId" />
+            </Principal>
+            <Dependent Role="new_nodes">
+              <PropertyRef Name="IbeaconIdFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_9DE66D_beaconsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="new_arcs" EntityType="Self.new_arcs" />
+          <EntitySet Name="new_builds" EntityType="Self.new_builds" />
+          <EntitySet Name="new_connection" EntityType="Self.new_connection" />
+          <EntitySet Name="new_floors" EntityType="Self.new_floors" />
+          <EntitySet Name="new_ibeacons" EntityType="Self.new_ibeacons" />
+          <EntitySet Name="new_nodes" EntityType="Self.new_nodes" />
+          <AssociationSet Name="FK_new_connection_new_arcs" Association="Self.FK_new_connection_new_arcs">
+            <End Role="new_arcs" EntitySet="new_arcs" />
+            <End Role="new_connection" EntitySet="new_connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_floors_new_builds" Association="Self.FK_new_floors_new_builds">
+            <End Role="new_builds" EntitySet="new_builds" />
+            <End Role="new_floors" EntitySet="new_floors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_connection_new_nodes" Association="Self.FK_new_connection_new_nodes">
+            <End Role="new_nodes" EntitySet="new_nodes" />
+            <End Role="new_connection" EntitySet="new_connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_connection_new_nodes1" Association="Self.FK_new_connection_new_nodes1">
+            <End Role="new_nodes" EntitySet="new_nodes" />
+            <End Role="new_connection" EntitySet="new_connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_nodes_new_floors" Association="Self.FK_new_nodes_new_floors">
+            <End Role="new_floors" EntitySet="new_floors" />
+            <End Role="new_nodes" EntitySet="new_nodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_new_nodes_new_ibeacons" Association="Self.FK_new_nodes_new_ibeacons">
+            <End Role="new_ibeacons" EntitySet="new_ibeacons" />
+            <End Role="new_nodes" EntitySet="new_nodes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DB_9DE66D_beaconsModelContainer" CdmEntityContainer="DB_9DE66D_beaconsEntities">
+          <EntitySetMapping Name="new_arcs">
+            <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_arcs">
+              <MappingFragment StoreEntitySet="new_arcs">
+                <ScalarProperty Name="arcId" ColumnName="arcId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="new_builds">
+            <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_builds">
+              <MappingFragment StoreEntitySet="new_builds">
+                <ScalarProperty Name="buildingId" ColumnName="buildingId" />
+                <ScalarProperty Name="buildingName" ColumnName="buildingName" />
+                <ScalarProperty Name="buildingNameRu" ColumnName="buildingNameRu" />
+                <ScalarProperty Name="matrixFile" ColumnName="matrixFile" />
+                <ScalarProperty Name="imageFile" ColumnName="imageFile" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="latt" ColumnName="latt" />
+                <ScalarProperty Name="longt" ColumnName="longt" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="house" ColumnName="house" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="compass" ColumnName="compass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="new_connection">
+            <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_connection">
+              <MappingFragment StoreEntitySet="new_connection">
+                <ScalarProperty Name="connectionId" ColumnName="connectionId" />
+                <ScalarProperty Name="nodeFrst" ColumnName="nodeFrst" />
+                <ScalarProperty Name="nodeScnd" ColumnName="nodeScnd" />
+                <ScalarProperty Name="arcIdFk" ColumnName="arcIdFk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="new_floors">
+            <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_floors">
+              <MappingFragment StoreEntitySet="new_floors">
+                <ScalarProperty Name="floorId" ColumnName="floorId" />
+                <ScalarProperty Name="dir" ColumnName="dir" />
+                <ScalarProperty Name="tiles" ColumnName="tiles" />
+                <ScalarProperty Name="tilesXcount" ColumnName="tilesXcount" />
+                <ScalarProperty Name="tilesYcount" ColumnName="tilesYcount" />
+                <ScalarProperty Name="mapLevel" ColumnName="mapLevel" />
+                <ScalarProperty Name="buildingIdFk" ColumnName="buildingIdFk" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="height" ColumnName="height" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="new_ibeacons">
+            <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_ibeacons">
+              <MappingFragment StoreEntitySet="new_ibeacons">
+                <ScalarProperty Name="beaconId" ColumnName="beaconId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="minor" ColumnName="minor" />
+                <ScalarProperty Name="major" ColumnName="major" />
+                <ScalarProperty Name="mapIdFK" ColumnName="mapIdFK" />
+                <ScalarProperty Name="coordX" ColumnName="coordX" />
+                <ScalarProperty Name="coordY" ColumnName="coordY" />
+                <ScalarProperty Name="nodeNum" ColumnName="nodeNum" />
+                <ScalarProperty Name="batteryLevel" ColumnName="batteryLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="new_nodes">
+            <EntityTypeMapping TypeName="DB_9DE66D_beaconsModel.new_nodes">
+              <MappingFragment StoreEntitySet="new_nodes">
+                <ScalarProperty Name="nodeId" ColumnName="nodeId" />
+                <ScalarProperty Name="coordX" ColumnName="coordX" />
+                <ScalarProperty Name="coordY" ColumnName="coordY" />
+                <ScalarProperty Name="mapIdFk" ColumnName="mapIdFk" />
+                <ScalarProperty Name="IbeaconIdFk" ColumnName="IbeaconIdFk" />
+                <ScalarProperty Name="nodeNum" ColumnName="nodeNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

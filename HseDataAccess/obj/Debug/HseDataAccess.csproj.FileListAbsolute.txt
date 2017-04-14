@@ -1,0 +1,24 @@
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\bin\Debug\HseDataAccess.dll.config
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\bin\Debug\HseDataAccess.dll
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\bin\Debug\HseDataAccess.pdb
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\bin\Debug\EntityFramework.dll
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\bin\Debug\EntityFramework.xml
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\obj\Debug\HseDataAccess.csprojResolveAssemblyReference.cache
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\obj\Debug\HseDataAccess.dll
+C:\Users\Екатерина\Documents\Visual Studio 2015\Projects\HSEbeacons_web\HseDataAccess\obj\Debug\HseDataAccess.pdb
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\bin\Debug\HseDataAccess.dll.config
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\bin\Debug\HseDataAccess.dll
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\bin\Debug\HseDataAccess.pdb
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\bin\Debug\EntityFramework.dll
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\bin\Debug\EntityFramework.xml
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\obj\Debug\HseDataAccess.csprojResolveAssemblyReference.cache
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\obj\Debug\HseDataAccess.dll
+C:\Users\Екатерина\Desktop\HSEbeacons_web\HseDataAccess\obj\Debug\HseDataAccess.pdb
