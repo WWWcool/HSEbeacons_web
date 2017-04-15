@@ -14,48 +14,77 @@ namespace HSEbeacons_web.Controllers
     public class IbeaconController : ApiController
     {
         private DB_9DE66D_beaconsEntities entities = new DB_9DE66D_beaconsEntities();
-         /*public object GetIBeacons()
+        //information about all beacons
+        [ActionName("GetIBeacons")]
+        public object GetIBeacons()
          {
              return (entities.new_ibeacons.ToList<new_ibeacons>()).Select(p => new { IbeaconId = p.beaconId, title = p.title, description = p.description, uuid = p.uuid, minor = p.minor, major = p.major, mapId = p.mapIdFK, coordX = p.coordX, coordY = p.coordY, nodeNum = p.nodeNum, batteryLevel = p.batteryLevel });
 
-         }*/
+         }
 
         //information about beacon by id
-        /*public object GetIBeaconById(int id)
+        [ActionName("GetIBeaconById")]
+        public object GetIBeaconById(int id)
         {
             return (entities.new_ibeacons.ToList<new_ibeacons>().Where(e => e.beaconId == id).Select(p => new { IbeaconId = p.beaconId, title = p.title, description = p.description, uuid = p.uuid, minor = p.minor, major = p.major, mapId = p.mapIdFK, coordX = p.coordX, coordY = p.coordY, nodeNum = p.nodeNum, batteryLevel = p.batteryLevel }));
 
-        }*/
+        }
         // beacon id by uuid, minor, major
-        public object GetIBeaconByUuidMinorMajor(char id, int minor, int major)
+        [Route("api/getibeaconbyuuid/{id}/{minor}/{major}")]
+        public object GetIBeaconByUuidMinorMajor(string id, int minor, int major)
         {
-            var jsondata = entities.new_ibeacons.ToList<new_ibeacons>().Where(e => (e.uuid.Equals(id)) & ( e.minor == minor)& (e.major == major)).Select(p => new { IbeaconId = p.beaconId});
+            var jsondata = entities.new_ibeacons.ToList<new_ibeacons>().Where(e => (e.uuid.Equals(id)) && ( e.minor == minor)&& (e.major == major)).Select(p => new { IbeaconId = p.beaconId});
             return jsondata;
         }
-        public IEnumerable<new_floors> IBeaconsByBuildingId(int id)
+        //Information about beacons by building id
+        public object GetIBeaconsByBuildingId(int id)
         {
-            return (entities.new_floors
-                .Where(e => e.buildingIdFk == id)).AsEnumerable();
+            IEnumerable<new_floors> map = entities.new_floors.Where(e => e.buildingIdFk == id);//.Select(p => new { floorId = p.floorId });
+            List<new_ibeacons> tmp_list = new List<new_ibeacons>();
+            foreach (new_floors f_id in map)
+            {
+                IEnumerable<new_ibeacons> floor = entities.new_ibeacons.Where(e => e.mapIdFK == f_id.floorId);
+                foreach (new_ibeacons b_id in floor)
+                {
+                    tmp_list.Add(b_id);
+                }
+            }
+            return tmp_list.Select(p => new { IbeaconId = p.beaconId, title = p.title, description = p.description, uuid = p.uuid, minor = p.minor, major = p.major, mapId = p.mapIdFK, coordX = p.coordX, coordY = p.coordY, nodeNum = p.nodeNum, batteryLevel = p.batteryLevel });
+         }
+        //Information about beacons by map id
+        public object GetIBeaconsByMapId(int id)
+        {
+            var jsondata = entities.new_ibeacons.ToList<new_ibeacons>().Where(e => (e.mapIdFK == id)).Select(p => new { IbeaconId = p.beaconId, title = p.title, description = p.description, uuid = p.uuid, minor = p.minor, major = p.major, mapId = p.mapIdFK, coordX = p.coordX, coordY = p.coordY, nodeNum = p.nodeNum, batteryLevel = p.batteryLevel });
+            return jsondata;
+        }
+
+        //amount of beacons
+        public int GetIBeaconCount()
+        {
+            IEnumerable<new_ibeacons> floor = entities.new_ibeacons;
+            var jsondata_1 = 0;
+            foreach (new_ibeacons b_id in floor)
+            {
+                jsondata_1++;
+            }
+            return jsondata_1;
+        }
+        //amount of beacons on the floor
+        public int GetIBeaconCountByMap(int id)
+        {
+            IEnumerable<new_ibeacons> floor = entities.new_ibeacons.Where(e => (e.mapIdFK == id));
+            var jsondata_1 = 0;
+            foreach (new_ibeacons b_id in floor)
+            {
+                jsondata_1++;
+            }
+            return jsondata_1;
+        }
+        //info about beacons without batteryLevel and map id
+        public object GetBeaconWithEventWithOutBatLvlAndMapId()
+        {
+            return (entities.new_ibeacons.ToList<new_ibeacons>()).Select(p => new { IbeaconId = p.beaconId, title = p.title, description = p.description, uuid = p.uuid, minor = p.minor, major = p.major, coordX = p.coordX, coordY = p.coordY, nodeNum = p.nodeNum});
 
         }
-        public object GetIBeaconsByBuildingId(int id) {
-            var map = IBeaconsByBuildingId(id).Select(p => new { floorId = p.floorId });
-            return (entities.new_ibeacons.ToList<new_ibeacons>() 
-                .Select(p => new { IbeaconId = p.beaconId, title = p.title, description = p.description, uuid = p.uuid, minor = p.minor, major = p.major, mapId = p.mapIdFK, coordX = p.coordX, coordY = p.coordY, nodeNum = p.nodeNum, batteryLevel = p.batteryLevel })
-                .Where(e => e.mapId.Equals(map)));
-
-        }
-        /*public object GetIBeaconsByBuildingId(int id)
-        {
-            var mapIdFk = entities.new_floors.ToList<new_floors>().Where(e => e.buildingIdFk == id).Select(p => new { floorId = p.floorId });
-            var jsondata = entities.new_ibeacons.ToList<new_ibeacons>().Where(e => (e.mapIdFK.Equals(mapIdFk))).Select(p => new { IbeaconId = p.beaconId });
-            return jsondata;
-        }*/
-        /*public object GetIBeaconsByMapId(int id)
-        {
-            var jsondata = entities.new_ibeacons.Where(e => (e.mapIdFK.Equals(id))).ToList<new_ibeacons>().Select(p => new { IbeaconId = p.beaconId });
-            return jsondata;
-        }*/
-
     }
 }

@@ -89,8 +89,8 @@
                 $('#getItemsButton').click(function (e) {
                     e.preventDefault();
                     $.ajax({
-                        type: 'POST',
-                        url: '/api/ibeacon/1',
+                        type: 'GET',
+                        url: 'api/values',
                         /*url: '/api/database/1',
                         beforeSend: function (xhr) {
                             
