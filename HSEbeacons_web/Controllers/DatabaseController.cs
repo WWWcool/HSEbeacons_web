@@ -73,7 +73,7 @@ namespace HSEbeacons_web.Controllers
         }
 
         //change matrix 
-        [Route("api/putnatrix/{id}/{matrix}")]
+        [Route("api/putmatrix/{id}/{matrix}")]
         public object GetExMatrix(int id, string matrix)
         {
             var obj = control.new_builds.Where(n => n.buildingId == id).SingleOrDefault();

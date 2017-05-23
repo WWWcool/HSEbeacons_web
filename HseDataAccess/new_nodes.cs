@@ -27,8 +27,7 @@ namespace HseDataAccess
         public Nullable<int> mapIdFk { get; set; }
         public Nullable<int> IbeaconIdFk { get; set; }
         public Nullable<int> nodeNum { get; set; }
-        public string type { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<new_connection> new_connection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

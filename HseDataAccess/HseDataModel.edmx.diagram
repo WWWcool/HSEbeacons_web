@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5db54c5d6d714bb789bf8f691b68524c" Name="Diagram1">
-        <EntityTypeShape EntityType="DB_9DE66D_beaconsModel.new_arcs" Width="1.5" PointX="6.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9DE66D_beaconsModel.new_arcs" Width="1.5" PointX="7.25" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9DE66D_beaconsModel.new_builds" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9DE66D_beaconsModel.new_connection" Width="1.5" PointX="7.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9DE66D_beaconsModel.new_floors" Width="1.5" PointX="2.25" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9DE66D_beaconsModel.new_ibeacons" Width="1.5" PointX="3.875" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9DE66D_beaconsModel.new_ibeacons" Width="1.5" PointX="3.875" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9DE66D_beaconsModel.new_nodes" Width="1.5" PointX="5.625" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="DB_9DE66D_beaconsModel.FK_new_connection_new_arcs" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9DE66D_beaconsModel.FK_new_floors_new_builds" ManuallyRouted="false" ></AssociationConnector>
